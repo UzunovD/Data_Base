@@ -1,0 +1,29 @@
+***
+Организуйте хранение категорий и товарных позиций учебной базы данных shop в СУБД MongoDB.
+***
+> use shop
+switched to db shop
+> db.createCollection('catalogs')
+> db.createCollection('products')
+> db.catalogs.insert({name: 'Процессоры'})
+> db.catalogs.insert({name: 'Видеокарты'})
+> db.catalogs.insert({name: 'Материнские платы'})
+
+Для заполнения таблтицы products необходимо знать первичные ключи id каталога.
+Получаем id каталогов:
+
+> db.catalogs.find()
+получаем:
+{ "_id" : ObjectId("5e3f06a4215bb978cc471953"), "name" : "Материнские платы" }
+
+Добавим позицию в products
+
+> db.products.insert(
+... {
+... name: 'Mother Board 1',
+... description: 'Материнаская плата 1',
+... price: 2159.00,
+... catalog_id: new ObjectId("5e3f06a4215bb978cc471953")
+... }
+... );
+
